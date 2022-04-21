@@ -10,7 +10,10 @@ import com.shiv.ignouecommerce.entities.Category;
 import com.shiv.ignouecommerce.entities.Product;
 import com.shiv.ignouecommerce.helper.factoryProvider;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -110,9 +113,30 @@ public class ProductOperationsServlet extends HttpServlet {
                     
                     int pid = pdao.saveProduct(newP);
                     
-                    // findout the path to upload the images
-                    String path = request.getRealPath("img") + File.separator + "products" + File.separator + fileName;
-                                        
+                    try {
+                        // findout the path to upload the images
+                        String path = request.getRealPath("img") + File.separator + "products" + File.separator + fileName;
+
+                        // uploading code...
+                        // for writing the file
+                        FileOutputStream fos = new FileOutputStream(path);
+
+                        // for reading the file
+                        // FileInputStream fis = new FileInputStream(part.getSubmittedFileName());
+                        InputStream istrm = part.getInputStream();
+                        // reading data
+                        byte []data = new byte[istrm.available()];
+                        istrm.read(data);
+                        fos.write(data);
+
+                        //close the open i/o streams
+                        fos.close();
+                        istrm.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    
+                    // firing the session, to display the message on admin screen for new product 
                     HttpSession httpSession = request.getSession();
                     httpSession.setAttribute("screenmsg", "Product data is saved successfully, new product id is : "+ pid);
                     response.sendRedirect("admin.jsp");
