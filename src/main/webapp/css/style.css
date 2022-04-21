@@ -1,0 +1,16 @@
+.custom-bg{
+    background-color: "f4f4f4";
+}
+
+.admin-page a {
+    color: #a9a9a9;
+    text-decoration: none;
+}
+
+.admin-page a:hover{
+    color: #111;
+}
+
+.admin-page .card:hover{
+    background-color: #f4f4f4;
+}

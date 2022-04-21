@@ -1,0 +1,12 @@
+com\shiv\ignouecommerce\servlets\NewCategoryServlet.class
+com\shiv\ignouecommerce\entities\User.class
+com\shiv\ignouecommerce\servlets\LogoutServlet.class
+com\shiv\ignouecommerce\helper\factoryProvider.class
+com\shiv\ignouecommerce\servlets\ProductOperationsServlet.class
+com\shiv\ignouecommerce\dao\ProductDao.class
+com\shiv\ignouecommerce\dao\UserDao.class
+com\shiv\ignouecommerce\servlets\LoginServlet.class
+com\shiv\ignouecommerce\entities\Category.class
+com\shiv\ignouecommerce\dao\CategoryDao.class
+com\shiv\ignouecommerce\entities\Product.class
+com\shiv\ignouecommerce\servlets\RegisterServlet.class
