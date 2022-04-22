@@ -81,7 +81,7 @@
                                     <div class="clearfix mb-3 text-center"> <span class="badge rounded bg-secondary text-md">₹ <%= p.getPriceAferApplyingDiscount()%></span><span class="text-xs">&nbsp;&nbsp;&nbsp;₹<del><%= p.getpPrice()%></del>/- <%= p.getpDiscount()%>% Off  </span></div>
 <!--                                    <div class="clearfix mb-3 text-center"> <span class="float-start badge rounded bg-primary">Price - <%= p.getpDiscount()%>% Off</span> <span class="float-end price-hp">₹<%= p.getPriceAferApplyingDiscount()%> </span></div>-->
                                     <h5 class="card-title text-center"><%= p.getpName()%></h5>
-                                    <div class="text-center w-full my-4"> <a href="#" onclick="addToCart('<%= p.getpId()%>', '<%= p.getpName()%>', '<%= p.getpPrice()%>')" class="btn btn-outline-primary">Add to Cart</a> </div>
+                                    <div class="text-center w-full my-4"> <a href="#" onclick="addToCart('<%= p.getpId()%>', '<%= p.getpName()%>', '<%= p.getpPrice()%>', '<%= p.getpPhoto()%>')" class="btn btn-outline-primary">Add to Cart</a> </div>
                                 </div>
                             </div>
                         </div>
@@ -89,6 +89,6 @@
                     </div>
                 </div>
             </div>
-                  
+                 
     </body>
 </html>

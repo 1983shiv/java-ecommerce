@@ -37,15 +37,18 @@ User user1 = (User) session.getAttribute("current-user");
         </li>
       </ul>
         <ul class="navbar-nav ml-auto">
+            
             <%
                 if( user1 == null){
                 %>
+                
                 <li class="nav-item">
                     <a class="nav-link" href="login.jsp">Login</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="registeration.jsp">Register</a>
                 </li>
+                
                 <%
                 }else{
                     %>
@@ -59,8 +62,15 @@ User user1 = (User) session.getAttribute("current-user");
                 }
             
             %>
-            
+            <li class="nav-item">
+                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#cart" onclick="updateModalCart()">
+                        <i class="fa fa-cart-plus" style="font-size: 20px; color: #fff;"></i>
+                        <span id="headerCart" style="font-size: 16px;">(0)</span>
+                    </a>
+                </li>
         </ul>
     </div>
   </div>
 </nav>
+            
+            <%@include file="common-modal.jsp" %> 
