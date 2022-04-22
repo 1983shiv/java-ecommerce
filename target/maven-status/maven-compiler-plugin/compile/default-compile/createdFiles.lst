@@ -4,6 +4,7 @@ com\shiv\ignouecommerce\servlets\LogoutServlet.class
 com\shiv\ignouecommerce\helper\factoryProvider.class
 com\shiv\ignouecommerce\servlets\ProductOperationsServlet.class
 com\shiv\ignouecommerce\dao\ProductDao.class
+com\shiv\ignouecommerce\helper\Helper.class
 com\shiv\ignouecommerce\dao\UserDao.class
 com\shiv\ignouecommerce\servlets\LoginServlet.class
 com\shiv\ignouecommerce\entities\Category.class

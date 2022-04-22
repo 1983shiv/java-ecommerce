@@ -15,7 +15,7 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Ignou-Ecommerce - Home </title>
+        <title>IgnouCart - Home </title>
         <%@include file="components/common_css_js.jsp" %>
     </head>
     <body>
@@ -23,8 +23,25 @@
         <div class="container py-4">
             <%@include file="components/screenmsg.jsp" %>
             <div class="row">
-                <%                    ProductDao pdao = new ProductDao(factoryProvider.getFactory());
-                    List<Product> plist = pdao.getProducts();
+                <%                    
+//                    String catId = "all";
+//                    if(request.getParameter("category") == null){
+//                        // catId = request.getParameter("category");
+//                        out.println("request is working....");
+//                    }
+                    
+                    ProductDao pdao = new ProductDao(factoryProvider.getFactory());
+                    List<Product> plist = null;
+                    //System.out.println("request is working....");
+                    if(request.getParameter("category") == null){
+                        plist = pdao.getProducts();
+                    } else {
+                        //System.out.println("request is working....");
+                        String catId = request.getParameter("category");
+                        int cid = Integer.parseInt(catId.trim());
+                        plist = pdao.getProductsByCategoryId(cid);
+                    }
+                    //plist = pdao.getProducts();
                     CategoryDao cdao = new CategoryDao(factoryProvider.getFactory());
                     List<Category> list = cdao.getCategories();
                 %>
@@ -33,11 +50,12 @@
                 <div class="col-md-3">
                     <!--showing products in grid-->
                     <ul class="list-group">
-                        <li class="list-group-item list-group-item-action active">Categories
-                            
-                        </li>
+                        <li class="list-group-item list-group-item-action active">Categories</li>
+                        <a href="index.jsp" class="list-group-item list-group-item-action">
+                            <li class="d-flex justify-content-between align-items-center">Show All</li>
+                        </a>
                         <% for (Category c : list) {%>
-                        <a href="#" class="list-group-item list-group-item-action">
+                        <a href="index.jsp?category=<%= c.getCategoryId()%>" class="list-group-item list-group-item-action">
                             <li class="d-flex justify-content-between align-items-center"><%= c.getCategoryTitle()%>
                                 <span class="badge bg-primary rounded-pill">
                                     <i class="fa-solid fa-arrow-up-right-from-square"></i>
@@ -49,9 +67,7 @@
                 </div>
 
                 <div class="col-md-9">
-
-                    <h6 class="mb-4">Total No. of Products...<%= plist.size()%></h6>
-                    <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-3 g-3 bg-light p-4">
+                    <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-3 g-3">
                         <% for (Product p : plist) {%>
 
                         <!--https://freefrontend.com/bootstrap-cards/-->
@@ -78,6 +94,8 @@
                     </div>
                 </div>
             </div>
-
+                    <div class="row">
+                        <h6 class="mb-4">Total No. of Products...<%= plist.size()%></h6>
+                    </div>        
     </body>
 </html>
