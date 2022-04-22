@@ -14,3 +14,9 @@
 .admin-page .card:hover{
     background-color: #f4f4f4;
 }
+
+.product-card:hover{
+    transform: scale(1.04);
+    transition: 0.3s ease-in-out;
+    z-index: 999;
+}
