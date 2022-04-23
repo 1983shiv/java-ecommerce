@@ -73,4 +73,5 @@ User user1 = (User) session.getAttribute("current-user");
   </div>
 </nav>
             
-            <%@include file="common-modal.jsp" %> 
+<%@include file="common-modal.jsp" %> 
+<div id="toast">This is custom toast text</div>

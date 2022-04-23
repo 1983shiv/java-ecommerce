@@ -27,6 +27,11 @@
                                                         <p class="mb-1">Shopping cart</p>
                                                         <p class="mb-0" id="blankCartMsg">You have 4 items in your cart</p>
                                                     </div>
+                                                    <div>
+                                                        <p class="mb-0"><span class="text-muted">Cart Total :</span> 
+                                                            <i class="fa-solid fa-indian-rupee-sign"></i>
+                                                            <span id="cartTotal">121212121</span></p>
+                                                    </div>
                                                 </div>
                                                 <div id="modal-cart-body"></div>
                                             </div>
@@ -39,7 +44,7 @@
                 </section>
 
                 <!--end here-->
-                <div class="modal-footer">
+                <div class="modal-footer d-flex">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" id="modal-checkout">Checkout</button>
                 </div>
@@ -47,3 +52,4 @@
         </div>
     </div>
 </div>
+

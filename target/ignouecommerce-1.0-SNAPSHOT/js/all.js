@@ -1,3 +1,11 @@
+function showToast(content){
+    document.querySelector("#toast").classList.add("toast-display");
+    document.querySelector("#toast").innerHTML = `${ content }`;
+    setTimeout(()=>{
+        document.querySelector("#toast").classList.remove("toast-display");
+    }, 3000);
+}
+
 // add to cart function
 function addToCart(id, name, price, pic){
     let cart = localStorage.getItem("cart");
@@ -13,8 +21,9 @@ function addToCart(id, name, price, pic){
                 };
         products.push(product);
         localStorage.setItem("cart", JSON.stringify(products));
-        console.log("product added first time", localStorage.getItem("cart"));
+        // console.log("product added first time", localStorage.getItem("cart"));
         updateCart();
+        showToast(`${name} added successfully to the cart `);
     } else {
     let pcart = JSON.parse(cart);
     let oldProduct = pcart.find((item) => item.pId === id);
@@ -26,8 +35,9 @@ function addToCart(id, name, price, pic){
             }
         });
     localStorage.setItem("cart", JSON.stringify(pcart));
-    console.log("product qty increased------", localStorage.getItem("cart"));
+    // console.log("product qty increased------", localStorage.getItem("cart"));
     updateCart();
+    showToast(`product qty increased for ${oldProduct.pName}`);
     } else{
         // add the products
         let product = {
@@ -41,6 +51,7 @@ function addToCart(id, name, price, pic){
         localStorage.setItem("cart", JSON.stringify(pcart));
         console.log("new producdt added to cart", localStorage.getItem("cart"));
         updateCart();
+        showToast(`${name} added successfully to the cart `);
         }
     }
 }
@@ -49,19 +60,22 @@ function removeItem(id){
     let indexToRemove;
     let cartStr = localStorage.getItem("cart");
     let cart = JSON.parse(cartStr);
+    let removedItem = cart.find((item) => item.pId === id);
+    console.log("removed Item : ", removedItem);
     cart.map((item, i) => {
         if(item.pId === id){
             indexToRemove = i;
         }
     });
     cart.splice(indexToRemove, 1);
-    console.log("newcart", cart);
+    // console.log("newcart", cart);
     localStorage.setItem("cart", JSON.stringify(cart));
     if (cart === null || cart.length === 0){
         document.querySelector("#blankCartMsg").innerHTML = `You have 0 items in your cart`;
         document.querySelector("#modal-cart-body").innerHTML = ``;
         document.querySelector("#modal-checkout").classList.add("disabled");
     }
+    showToast(`product removed successfully to the cart `);
     updateModalCart();
     updateCart();
 }
@@ -85,11 +99,17 @@ function updateModalCart(){
         console.log("updateModalCart");
         if (cart === null || cart.length === 0){
             document.querySelector("#blankCartMsg").innerHTML = `You have 0 items in your cart`;
+            document.querySelector("#cartTotal").innerHTML = `0`;
             document.querySelector("#modal-cart-body").innerHTML = ``;
             document.querySelector("#modal-checkout").classList.add("disabled");
             
         } else {
+            let cartTotal = 0;
+            cart.map((item) => {
+                cartTotal += item.pPrice*item.pQuantity;
+            });
             document.querySelector("#blankCartMsg").innerHTML = `You have ${ cart.length } items in your cart.`;
+            document.querySelector("#cartTotal").innerHTML = `${ cartTotal }`;
             // loop through the cart items;
             document.querySelector("#modal-cart-body").innerHTML = ``;
             cart.map((item) => {
@@ -127,3 +147,5 @@ function updateModalCart(){
 document.addEventListener('DOMContentLoaded', function() {
         updateCart();
 });
+
+
