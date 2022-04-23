@@ -4,6 +4,18 @@
     Author     : ninja
 --%>
 
+<%@page import="com.shiv.ignouecommerce.entities.User"%>
+
+<%
+
+    User user = (User) session.getAttribute("current-user");
+    if (user == null) {
+        session.setAttribute("screenmsg", "You are not loggedd in! ");
+        response.sendRedirect("login.jsp");
+        return;
+    }   
+
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,6 +28,7 @@
     <body>
         <%@include file="components/navbar.jsp" %>
         <div class="container py-4">
+            <%@include file="components/screenmsg.jsp" %>
             <h2 class="text-lg my-4">Checkout</h2>
             <section class="h-100 h-custom" style="background-color: #f4f4f4;">
                 <div class="container py-5 h-100">
@@ -63,24 +76,6 @@
 
                                                     <form class="mt-4">
                                                         <div class="form-outline form-white mb-4">
-                                                            <input type="text" id="cName" class="form-control form-control-lg" siez="17"
-                                                                   placeholder="Name" />
-                                                            <label class="form-label" for="typeName">Name</label>
-                                                        </div>
-                                                        
-                                                        <div class="form-outline form-white mb-4">
-                                                            <input type="text" id="cEmail" class="form-control form-control-lg" siez="17"
-                                                                   placeholder="Email" />
-                                                            <label class="form-label" for="typeName">Email</label>
-                                                        </div><!-- comment -->
-                                                        
-                                                        <div class="form-outline form-white mb-4">
-                                                            <input type="number" id="cPhone" class="form-control form-control-lg" siez="17"
-                                                                   placeholder="Mobile No" />
-                                                            <label class="form-label" for="typeName">Mobile No</label>
-                                                        </div>
-
-                                                        <div class="form-outline form-white mb-4">
                                                             <input type="text" id="cCardNumber" class="form-control form-control-lg" siez="17"
                                                                    placeholder="1234 5678 9012 3457" minlength="19" maxlength="19" />
                                                             <label class="form-label" for="typeText">Card Number</label>
@@ -101,6 +96,30 @@
                                                                     <label class="form-label" for="typeText">Cvv</label>
                                                                 </div>
                                                             </div>
+                                                        </div>
+                                                        
+                                                        <div class="form-outline form-white mb-4">
+                                                            <input type="text" id="cName" class="form-control form-control-lg" siez="17"
+                                                                   placeholder="Name" value="<%= user.getUserName()%>" />
+                                                            <label class="form-label" for="typeName">Name</label>
+                                                        </div>
+                                                        
+                                                        <div class="form-outline form-white mb-4">
+                                                            <input type="text" id="cEmail" class="form-control form-control-lg" siez="17"
+                                                                   placeholder="Email" value="<%= user.getUserEmail()%>" />
+                                                            <label class="form-label" for="typeName">Email</label>
+                                                        </div><!-- comment -->
+                                                        
+                                                        <div class="form-outline form-white mb-4">
+                                                            <input type="number" id="cPhone" class="form-control form-control-lg" siez="17"
+                                                                   placeholder="Mobile No" value="<%= user.getUserPhone()%>" />
+                                                            <label class="form-label" for="typeName">Mobile No</label>
+                                                        </div>
+
+                                                        <div class="form-outline form-white mb-4">
+                                                            <Textarea type="number" id="cAddress" class="form-control form-control-lg" siez="17"
+                                                                      placeholder="Address" /><%= user.getUserAddress()%></Textarea>
+                                                            <label class="form-label" for="typeName">Address</label>
                                                         </div>
 
                                                     </form>
@@ -127,7 +146,7 @@
 
                                                     <button type="button" class="btn btn-info btn-block btn-lg">
                                                         <div class="d-flex justify-content-between">
-                                                            <p><span>Make the Payment <i class="fas fa-long-arrow-alt-right ms-2"></i></span></p>
+                                                            <p><span>Order Now <i class="fas fa-long-arrow-alt-right ms-2"></i></span></p>
                                                         </div>
                                                     </button>
 

@@ -79,12 +79,12 @@ public class LoginServlet extends HttpServlet {
                     } else if ( user.getUserType().equals("normal")){
                         httpSession.setAttribute("screenmsg", "Welcome " + user.getUserName() + "  You are now successfully logged in!");
                         // redirect to home page
-                        response.sendRedirect("index.jsp");
+                        response.sendRedirect("checkout.jsp");
                         return;
                     } else {
                         httpSession.setAttribute("screenmsg", "Unknown User :) ");
                         // redirect to home page
-                        response.sendRedirect("index.jsp");
+                        response.sendRedirect("checkout.jsp");
                         return;
                     }
                 }
