@@ -25,12 +25,12 @@
                                                 <div class="d-flex justify-content-between align-items-center mb-4">
                                                     <div>
                                                         <p class="mb-1">Shopping cart</p>
-                                                        <p class="mb-0" id="blankCartMsg">You have 4 items in your cart</p>
+                                                        <p class="mb-0 blankCartMsg">You have 4 items in your cart</p>
                                                     </div>
                                                     <div>
                                                         <p class="mb-0"><span class="text-muted">Cart Total :</span> 
                                                             <i class="fa-solid fa-indian-rupee-sign"></i>
-                                                            <span id="cartTotal">121212121</span></p>
+                                                            <span class="cartTotal">121212121</span></p>
                                                     </div>
                                                 </div>
                                                 <div id="modal-cart-body"></div>
@@ -46,10 +46,11 @@
                 <!--end here-->
                 <div class="modal-footer d-flex">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="modal-checkout">Checkout</button>
+                    <a href="checkout.jsp" class="btn btn-primary" id="modal-checkout">Checkout</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<div id="toast">This is custom toast text</div>
 

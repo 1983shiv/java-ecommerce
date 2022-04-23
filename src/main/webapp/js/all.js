@@ -71,8 +71,9 @@ function removeItem(id){
     // console.log("newcart", cart);
     localStorage.setItem("cart", JSON.stringify(cart));
     if (cart === null || cart.length === 0){
-        document.querySelector("#blankCartMsg").innerHTML = `You have 0 items in your cart`;
+        document.querySelector(".blankCartMsg").innerHTML = `You have 0 items in your cart`;
         document.querySelector("#modal-cart-body").innerHTML = ``;
+        document.querySelector(".blankCheckoutMsg").innerHTML = `You have 0 items in your cart`;
         document.querySelector("#modal-checkout").classList.add("disabled");
     }
     showToast(`product removed successfully to the cart `);
@@ -86,20 +87,20 @@ function updateCart(){
         let cart = JSON.parse(cartStr);
         if (cart === null || cart.length === 0){
         document.querySelector("#headerCart").innerHTML = `( 0)`;
-        document.querySelector("#blankCartMsg").innerHTML = `You have 0 items in your cart`;
+        document.querySelector(".blankCartMsg").innerHTML = `You have 0 items in your cart`;
+        document.querySelector(".blankCheckoutMsg").innerHTML = `You have 0 items in your cart`;
         
     } else {
         document.querySelector("#headerCart").innerHTML = `( ${ cart.length })`;
     }
 }
 
-function updateModalCart(){
-        let cartStr = localStorage.getItem("cart");
+function updateModal(){
+    let cartStr = localStorage.getItem("cart");
         let cart = JSON.parse(cartStr);
-        console.log("updateModalCart");
         if (cart === null || cart.length === 0){
-            document.querySelector("#blankCartMsg").innerHTML = `You have 0 items in your cart`;
-            document.querySelector("#cartTotal").innerHTML = `0`;
+            document.querySelector(".blankCartMsg").innerHTML = `You have 0 items in your cart`;
+            document.querySelector(".cartTotal").innerHTML = `0`;
             document.querySelector("#modal-cart-body").innerHTML = ``;
             document.querySelector("#modal-checkout").classList.add("disabled");
             
@@ -108,13 +109,12 @@ function updateModalCart(){
             cart.map((item) => {
                 cartTotal += item.pPrice*item.pQuantity;
             });
-            document.querySelector("#blankCartMsg").innerHTML = `You have ${ cart.length } items in your cart.`;
-            document.querySelector("#cartTotal").innerHTML = `${ cartTotal }`;
+            document.querySelector(".blankCartMsg").innerHTML = `You have ${ cart.length } items in your cart.`;
+            document.querySelector(".cartTotal").innerHTML = `${ cartTotal }`;
             // loop through the cart items;
-            document.querySelector("#modal-cart-body").innerHTML = ``;
+            let newModalBody = ``;
             cart.map((item) => {
-                console.log("Name", item.pName);
-                document.querySelector("#modal-cart-body").innerHTML += `
+                newModalBody += `
                 <div class="card mb-3">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
@@ -141,6 +141,66 @@ function updateModalCart(){
                     </div>
                 </div>`;
             });
+            document.querySelector("#modal-cart-body").innerHTML = newModalBody;
+        }
+}
+
+function updateModalCart(){
+        let cartStr = localStorage.getItem("cart");
+        let cart = JSON.parse(cartStr);
+        if (cart === null || cart.length === 0){
+            document.querySelector(".blankCartMsg").innerHTML = `You have 0 items in your cart`;
+            document.querySelector(".cartTotal").innerHTML = `0`;
+            document.querySelector(".blankCheckoutMsg").innerHTML = `You have 0 items in your cart`;
+            document.querySelector(".CheckoutTotal").innerHTML = `0`;
+            document.querySelector(".subtotal").innerHTML = `0`;
+            document.querySelector(".ctotal").innerHTML = `0`;
+            document.querySelector("#modal-cart-body").innerHTML = ``;
+            document.querySelector("#modal-checkout").classList.add("disabled");
+            
+        } else {
+            let cartTotal = 0;
+            cart.map((item) => {
+                cartTotal += item.pPrice*item.pQuantity;
+            });
+            document.querySelector(".blankCartMsg").innerHTML = `You have ${ cart.length } items in your cart.`;
+            document.querySelector(".cartTotal").innerHTML = `${ cartTotal }`;
+            // document.querySelector(".blankCheckoutMsg").innerHTML = `You have ${ cart.length } items in your cart.`;
+            document.querySelector(".CheckoutTotal").innerHTML = `${ cartTotal }`;
+            document.querySelector(".subtotal").innerHTML = `${ cartTotal }`;
+            document.querySelector(".ctotal").innerHTML = `${ cartTotal }`;
+            // loop through the cart items;
+            let newModalBody = ``;
+            cart.map((item) => {
+                newModalBody += `
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex flex-row align-items-center">
+                                <div>
+                                    <img
+                                        src="img/products/${item.pPhoto}"
+                                        class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
+                                </div>
+                                <div class="ms-3">
+                                    <h5>${item.pName}</h5>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row align-items-center">
+                                <div style="width: 50px;">
+                                    <h5 class="fw-normal mb-0">${item.pQuantity}</h5>
+                                </div>
+                                <div style="width: 80px;">
+                                    <h5 class="mb-0">${item.pPrice}</h5>
+                                </div>
+                                <a href="#!" style="color: #cecece;" onclick="removeItem(${item.pId})"><i class="fas fa-trash-alt"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            });
+            document.querySelector("#modal-cart-body").innerHTML = newModalBody;
+            document.querySelector("#checkout-body").innerHTML = newModalBody;
         }
     }
 

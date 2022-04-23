@@ -63,7 +63,7 @@ User user1 = (User) session.getAttribute("current-user");
             
             %>
             <li class="nav-item">
-                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#cart" onclick="updateModalCart()">
+                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#cart" onclick="updateModal()">
                         <i class="fa fa-cart-plus" style="font-size: 20px; color: #fff;"></i>
                         <span id="headerCart" style="font-size: 16px;">(0)</span>
                     </a>
@@ -74,4 +74,3 @@ User user1 = (User) session.getAttribute("current-user");
 </nav>
             
 <%@include file="common-modal.jsp" %> 
-<div id="toast">This is custom toast text</div>
