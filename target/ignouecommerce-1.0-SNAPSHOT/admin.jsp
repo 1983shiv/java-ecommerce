@@ -4,6 +4,8 @@
     Author     : ninja
 --%>
 
+<%@page import="java.util.Map"%>
+<%@page import="com.shiv.ignouecommerce.helper.Helper"%>
 <%@page import="java.util.List"%>
 <%@page import="com.shiv.ignouecommerce.entities.Category"%>
 <%@page import="com.shiv.ignouecommerce.helper.factoryProvider"%>
@@ -25,6 +27,14 @@
 
 %>
 
+<%
+    CategoryDao cdao = new CategoryDao(factoryProvider.getFactory());
+    List<Category> list = cdao.getCategories();
+    
+    // help class for userCount and productCount;
+    Map<String, Long> m = Helper.getCounts(factoryProvider.getFactory());
+%>  
+                            
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -83,7 +93,7 @@
                             <img class="img-fluid" src="icons/people.png" alt="Users" width="64px" height="64px" />
                         </div>
                         <div class="card-body text-center">
-                            <span class="card-subtitle">64</span>
+                            <span class="card-subtitle"><%= m.get("userCount") %></span>
                             <a href="#">
                                 <h4 class="card-title">Users</h4>
                             </a>
@@ -96,7 +106,7 @@
                             <img class="img-fluid" src="icons/keys.png" alt="Categories" width="64px" height="64px" />
                         </div>
                         <div class="card-body text-center">
-                            <span>18+</span>
+                            <span><%= list.size()%></span>
                             <a href="#">
                                 <h4 class="card-title">Categories</h4>
                             </a>
@@ -109,7 +119,7 @@
                             <img class="img-fluid" src="icons/delivery-box.png" alt="Users" width="64px" height="64px" />
                         </div>
                         <div class="card-body text-center">
-                            <span>640</span>
+                            <span><%= m.get("productCount") %></span>
                             <a href="#">
                                 <h4 class="card-title">Products</h4>
                             </a>
@@ -199,14 +209,10 @@
                                 <input type="number" class="form-control" id="pQuantity" name="pQuantity" value = "1" required >
                             </div>
 
-                            <%
-                                CategoryDao cdao = new CategoryDao(factoryProvider.getFactory());
-                                List<Category> list = cdao.getCategories();
-                                
-                            %>    
+                              
                             <select name="categoryId" id="categoryId" class="form-select" aria-label="select">
                                 <% for (Category c:list) { %>
-                                <option value="<%= c.getCategoryId() %>"><%= c.getCategoryTitle() %></option>
+                                    <option value="<%= c.getCategoryId() %>"><%= c.getCategoryTitle() %></option>
                                 <% } %>
                                 
                             </select>

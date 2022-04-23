@@ -3,6 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.shiv.ignouecommerce.helper;
+import java.util.HashMap;
+import java.util.Map;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 
 /**
  *
@@ -23,4 +28,26 @@ public class Helper {
         }
     }
     
+    public static Map<String, Long> getCounts(SessionFactory factory){
+        Session session = factory.openSession();
+        String q1 = "Select Count(*) from User";
+        String q2 = "Select Count(*) from Product";
+        
+        Query r1 = session.createQuery(q1);
+        Query r2 = session.createQuery(q2);
+        
+        Long userCount = (Long) r1.list().get(0);
+        Long productCount = (Long) r2.list().get(0);
+        
+        Map<String, Long> map = new HashMap<>();
+        map.put("userCount", userCount);
+        map.put("productCount", productCount);
+        
+        session.close();
+        
+        return map;
+    }
+    
 }
+
+

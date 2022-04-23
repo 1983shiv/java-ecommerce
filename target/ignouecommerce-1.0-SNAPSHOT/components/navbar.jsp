@@ -25,14 +25,16 @@ User user1 = (User) session.getAttribute("current-user");
           <a class="nav-link" href="admin.jsp">Admin</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="index.jsp" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Categories
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Electronics</a></li>
-            <li><a class="dropdown-item" href="#">Mobile</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Login/Logout</a></li>
+              <li><a class="dropdown-item" href="index.jsp">All Categories</a></li>
+            <li><a class="dropdown-item" href="index.jsp?category=2">Laptop</a></li>
+            <li><a class="dropdown-item" href="index.jsp?category=1">Mobile</a></li>
+            <li><a class="dropdown-item" href="index.jsp?category=3">Digital Watches</a></li>
+            <li><a class="dropdown-item" href="index.jsp?category=4">Digital Tv</a></li>
+            
           </ul>
         </li>
       </ul>
